@@ -18,13 +18,15 @@ class UserController extends Controller
             $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required'
+                'password' => 'required',
+                'mobile' => 'required'
             ]);
 
             $user = User::create([
                 "name" => $request->input('name'),
                 "email" => $request->input('email'),
                 "password" => $request->input('password'),
+                "mobile" => $request->input('mobile'),
             ]);
 
             return response()->json([
