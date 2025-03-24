@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeshboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
@@ -54,4 +55,7 @@ route::middleware(TokenVerificationMiddleware::class)->group(function () {
     Route::get('/list-invoice', [InvoiceController::class, "InvoiceList"])->name('list.invoice');
     Route::post('/details-invoice', [InvoiceController::class, "InvoiceDetails"])->name('details.invoice');
     Route::get('/invoice-delete/{id}', [InvoiceController::class, "InvoiceDelete"])->name('delete.invoice');
+
+    // Deshboard Summary APi point 
+    Route::get('/deshboard-summary',[DeshboardController::class,'deshboardSummary']);
 });
