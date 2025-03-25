@@ -1,10 +1,12 @@
 import './bootstrap';
+import { router } from '@inertiajs/vue3';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import NProgress from 'nprogress'
 import 'bootstrap/dist/css/bootstrap.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
+import './Assets/css/main.css';
 
 createInertiaApp({
   resolve: name => {

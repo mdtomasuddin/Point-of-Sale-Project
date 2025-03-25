@@ -7,9 +7,23 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DeshboardController extends Controller
 {
+
+    public function DeshboardPage(Request $request)
+    {
+        // $user = $request->header('email');
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'user Login successfully !',
+        //     'user' => $user,
+        // ]);
+        return Inertia::render('DeshboardPage');
+    }
+
+
     public function deshboardSummary(Request $request)
     {
         $user_id = $request->header('id');

@@ -9,9 +9,43 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
+
+    public function LoginPage(Request $request)
+    {
+        return Inertia::render('LoginPage');
+    }
+
+
+    public function registrationPage(Request $request)
+    {
+        return Inertia::render('registrationPage');
+    }
+
+
+    public function SendOTPPage(Request $request)
+    {
+        return Inertia::render('SendOTPPage');
+    }
+
+
+    public function VerifyOTPPage(Request $request)
+    {
+        return Inertia::render('VerifyOTPPage');
+    }
+
+
+    public function ResetPasswordPage(Request $request)
+    {
+        return Inertia::render('ResetPassword');
+    }
+
+
+
+
     public function userRegistration(Request $request)
     {
         try {
@@ -49,38 +83,47 @@ class UserController extends Controller
             ->select('id')->first();
 
         if ($count !== null) {
-            $token = JWTToken::CreateToken($request->input('email'), $count->id);
-            return response()->json([
-                'status' => 'success',
-                'message' => 'user Login successfully !',
-                'token' => $token,
-            ])->cookie('token', $token, 60 * 24 * 30);
+            // $token = JWTToken::CreateToken($request->input('email'), $count->id);
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => 'user Login successfully !',
+            //     'token' => $token,
+            // ])->cookie('token', $token, 60 * 24 * 30);
+
+            $email = $request->input('email');
+            $user_id = $count->id;
+
+            $request->session()->put('email', $email);
+            $request->session()->put('user_id', $user_id);
+
+            $data=['message'=>"user Login Successfully ", 'status'=>true, 'error'=>''];
+            return redirect('/DeshboardPage')->with($data);
+
         } else {
-            return response()->json([
-                'status' => 'Fail',
-                'message' => 'unauthorized',
-            ]);
+            // return response()->json([
+            //     'status' => 'Fail',
+            //     'message' => 'unauthorized',
+            // ]);
+            $data=['message'=>"user failed", 'status'=>true, 'error'=>''];
+            return redirect('/login')->with($data);
         }
     }
 
 
-    public function DeshboardPage(Request $request)
-    {
-        $user = $request->header('email');
-        return response()->json([
-            'status' => 'success',
-            'message' => 'user Login successfully !',
-            'user' => $user,
-        ]);
-    }
 
 
     public function logout(Request $request)
     {
-        return response()->json([
-            'status' => 'success',
-            'message' => 'user Logout successfully !',
-        ])->cookie('token', '', -1);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'user Logout successfully !',
+        // ])->cookie('token', '', -1);
+        $request->session()->forget('email');
+        $request->session()->forget('user_id');
+
+        $data=['message'=>"user logout Successfully ", 'status'=>true, 'error'=>''];
+        return redirect('/login')->with($data);
+
     }
 
 

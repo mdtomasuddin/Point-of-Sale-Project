@@ -7,15 +7,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\SessionAuthenticateMiddleware;
 use App\Http\Middleware\TokenVerificationMiddleware;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::get('/', [HomeController::class, "index"])->name('home');
-Route::get('/test', [HomeController::class, "test"]);
 
 //user backend point
 Route::post('/user-registration', [UserController::class, "userRegistration"])->name('user.registration');
@@ -24,8 +23,9 @@ Route::post('/SendOTPPage', [UserController::class, "SendOTPCode"]);
 Route::post('/verify-otp', [UserController::class, "VerifyOTP"]);
 
 
-route::middleware(TokenVerificationMiddleware::class)->group(function () {
-    Route::get('/DeshboardPage', [UserController::class, "DeshboardPage"])->name('Deshboard.Page');
+// route::middleware(TokenVerificationMiddleware::class)->group(function () {
+route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
+    Route::get('/DeshboardPage', [DeshboardController::class, "DeshboardPage"])->name('Deshboard.Page');
     Route::get('/logout', [UserController::class, "logout"])->name('logout.Page');
     Route::post('/Reset-Password', [UserController::class, "resetPassword"]);
 
@@ -57,5 +57,14 @@ route::middleware(TokenVerificationMiddleware::class)->group(function () {
     Route::get('/invoice-delete/{id}', [InvoiceController::class, "InvoiceDelete"])->name('delete.invoice');
 
     // Deshboard Summary APi point 
-    Route::get('/deshboard-summary',[DeshboardController::class,'deshboardSummary']);
+    Route::get('/deshboard-summary', [DeshboardController::class, 'deshboardSummary']);
+
+    //reset password 
+    Route::get('/reset-password', [UserController::class, 'ResetPasswordPage']);
 });
+
+//Page Route 
+Route::get('/login', [UserController::class, "LoginPage"])->name('loginPage');
+Route::get('/registration', [UserController::class,"registrationPage" ])->name('registrationPage');
+Route::get('/send-otp', [UserController::class, 'SendOTPPage'])->name('SendOTPPage');
+Route::get('/verify-OTPPage', [UserController::class, 'VerifyOTPPage'])->name('VerifyOTPPage');
