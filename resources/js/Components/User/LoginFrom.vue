@@ -13,7 +13,7 @@ function submit() {
     else if (form.password.length === 0) {
         toaster.warning("password is Required");
     } else {
-        form.post("/user-login", {
+        form.get("/user-login", {
             onSuccess: () => {
                 if (page.props.flash.status === true) {
                     router.get('/DeshboardPage');
@@ -46,9 +46,9 @@ function submit() {
                             <hr />
                             <div class="float-end mt-3">
                                 <span>
-                                    <Link class="text-center ms-3 h6" href="registrationForm.html">Sign Up </Link>
+                                    <Link class="text-center ms-3 h6" href="/registration">Sign Up </Link>
                                     <span class="ms-1">|</span>
-                                    <Link class="text-center ms-3 h6" href="sendOTPForm.html">Forget Password</Link>
+                                    <Link class="text-center ms-3 h6" href="/send-otp">Forget Password</Link>
                                 </span>
                             </div>
                         </div>

@@ -63,16 +63,21 @@ class UserController extends Controller
                 "mobile" => $request->input('mobile'),
             ]);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'user registration successfully !',
-                'data' => $user,
-            ]);
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => 'user registration successfully !',
+            //     'data' => $user,
+            // ]);
+            
+            $data=['message'=>"user Registration Successfully ", 'status'=>true, 'error'=>""];
+            return redirect('/login')->with($data);
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'Fail',
-                'message' => $e->getMessage(),
-            ]);
+            // return response()->json([
+            //     'status' => 'Fail',
+            //     'message' => $e->getMessage(),
+            // ]);
+            $data=['message'=>"user Registration Failed ", 'status'=>false, 'error'=>""];
+            return redirect('/user-registration')->with($data);
         }
     }
 
@@ -104,7 +109,7 @@ class UserController extends Controller
             //     'status' => 'Fail',
             //     'message' => 'unauthorized',
             // ]);
-            $data=['message'=>"user failed", 'status'=>true, 'error'=>''];
+            $data=['message'=>"user failed", 'status'=>false, 'error'=>''];
             return redirect('/login')->with($data);
         }
     }
