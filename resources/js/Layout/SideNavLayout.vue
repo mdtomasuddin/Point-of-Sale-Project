@@ -21,7 +21,7 @@ import { Link } from '@inertiajs/vue3';
             <span class="side-bar-item-caption">Dashboard</span>
             </Link>
 
-            <Link href="#" class="side-bar-item">
+            <Link href="/category-page" class="side-bar-item">
             <span class="side-bar-item-icon"><i class="fa fa-th-list text-green"></i></span>
             <span class="side-bar-item-caption">Category</span>
             </Link>

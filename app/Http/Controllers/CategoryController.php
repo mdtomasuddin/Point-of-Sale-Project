@@ -4,9 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
+
+    public function CategoryPage(Request $request)
+    {
+        $user_id = $request->header('id');
+        $categories = Category::where('user_id', $user_id)->get();
+        return Inertia::render('CategoryPage', [
+            "categories" => $categories,
+        ]);
+    }
+    public function CategorySavePage(Request $request)
+    {
+        $category_id = $request->query('id');
+        $user_id = $request->header('id');
+        $category = Category::where('id', $category_id)->where('user_id', $user_id)->first();
+        return Inertia::render('CategorySavePage', [
+            "category" => $category,
+        ]);
+    }
+
     public function CreateCategory(Request $request)
     {
         $user_id = $request->header('id');
@@ -16,10 +36,13 @@ class CategoryController extends Controller
             "user_id" => $user_id
         ]);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Category Create Successfully !',
-        ]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Category Create Successfully !',
+        // ]);
+
+        $data = ['message' => "Category Create Successfully ", 'status' => true, 'error' => ''];
+        return redirect('/category-page')->with($data);
     }
 
     public function CategoryList(Request $request)
@@ -44,21 +67,24 @@ class CategoryController extends Controller
         Category::where('user_id', $user_id)->where('id', $id)->update([
             'name' => $request->input('name'),
         ]);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Category Create Successfully !',
-        ]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Category Create Successfully !',
+        // ]);
+        $data = ['message' => "Category Updated Successfully ", 'status' => true, 'error' => ''];
+        return redirect('/category-page')->with($data);
     }
 
-    
+
     public function CategoryDelete(Request $request, $id)
     {
         $user_id = $request->header('id');
         Category::where('user_id', $user_id)->where('id', $id)->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Category Deleted Successfully !',
-        ]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Category Deleted Successfully !',
+        // ]);
+        $data = ['message' => "Category Deleted Successfully ", 'status' => true, 'error' => ''];
+        return redirect('/category-page')->with($data);
     }
 }

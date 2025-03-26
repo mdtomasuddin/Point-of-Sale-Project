@@ -13,7 +13,7 @@ function submit() {
     else if (form.password.length === 0) {
         toaster.warning("password is Required");
     } else {
-        form.get("/user-login", {
+        form.post("/user-login", {
             onSuccess: () => {
                 if (page.props.flash.status === true) {
                     router.get('/DeshboardPage');

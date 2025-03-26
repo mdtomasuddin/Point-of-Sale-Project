@@ -35,6 +35,10 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::post('/category-by-id', [CategoryController::class, "CategoryById"]);
     Route::post('/update-category', [CategoryController::class, "CategoryUpdate"])->name('update.category');
     Route::get('/Delete-category/{id}', [CategoryController::class, "CategoryDelete"])->name('Delete.category');
+    //category page 
+    Route::get('/category-page', [CategoryController::class, "CategoryPage"])->name('CategoryPage');
+    Route::get('/CategorySavePage', [CategoryController::class, "CategorySavePage"])->name('CategoryPage');
+
 
     //Products API point
     Route::post('/create-Product', [ProductController::class, "CreateProduct"])->name('create.Product');
