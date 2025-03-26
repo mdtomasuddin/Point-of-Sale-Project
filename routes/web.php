@@ -53,6 +53,10 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::post('/customer-by-id', [CustomerController::class, "customerById"]);
     Route::post('/update-customer', [CustomerController::class, "customerUpdate"])->name('update.customer');
     Route::get('/Delete-customer/{id}', [CustomerController::class, "customerDelete"])->name('Delete.customer');
+    //Customer page
+    Route::get('/customer-page', [CustomerController::class, "customerPage"])->name('customer.Page');
+    Route::get('/CustomerSavePage', [CustomerController::class, "CustomerSavePage"])->name('CustomerSave.Page');
+
 
     //Invoice API point
     Route::post('/invoice-create', [InvoiceController::class, "InvoiceCreate"])->name('create.invoice');

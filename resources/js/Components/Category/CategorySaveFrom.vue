@@ -16,21 +16,21 @@ if (id.value !== 0 && category !== null) {
     form.name = category.name;
 }
 function submit() {
-   if(form.name.length == 0){
+    if (form.name.length == 0) {
         toaster.error("Category Name is Required");
 
-   }else{
-    form.post(URL, {
-        onSuccess: () => {
-            if (page.props.flash.status === true) {
-                router.get('/category-page');
-                toaster.success(page.props.flash.message);
-            } else {
-                toaster.error(page.props.flash.message);
+    } else {
+        form.post(URL, {
+            onSuccess: () => {
+                if (page.props.flash.status === true) {
+                    router.get('/category-page');
+                    toaster.success(page.props.flash.message);
+                } else {
+                    toaster.error(page.props.flash.message);
+                }
             }
-        }
-    });
-   }
+        });
+    }
 }
 
 
