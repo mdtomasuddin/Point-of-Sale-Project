@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Exception;
@@ -19,7 +20,18 @@ class ProductController extends Controller
         ]);
     }
 
-    
+    public function ProductSavePage(Request $request)
+    {
+        $user_id = $request->header('id');
+        $product_id =$request->query('id');
+        $product = Product::where('id', $product_id)->where('user_id', $user_id)->first();
+        $categories = Category::where('user_id', $user_id)->get();
+        return Inertia::render('ProductSavePage', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
+    }
+
     public function CreateProduct(Request $request)
     {
         $user_id = $request->header('id');
@@ -52,10 +64,8 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Product created successfully'
-        ]);
+        $data=['message'=>'Product created successfully','status'=>true,'error'=>''];
+        return redirect()->back()->with($data);
     }
 
     public function ProductList(Request $request)
@@ -108,10 +118,9 @@ class ProductController extends Controller
         }
 
         $product->save();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Product Updated successfully'
-        ]);
+        
+        $data=['message'=>'Product Updated successfully','status'=>true,'error'=>''];
+        return redirect('/product-page')->with($data);
     }
 
     public function ProductDelete(Request $request, $id)

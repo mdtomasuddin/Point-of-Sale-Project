@@ -48,7 +48,8 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::get('/Delete-Product/{id}', [ProductController::class, "ProductDelete"])->name('Delete.Product');
 
     //Product page
-    Route::get('/product-page', [ProductController::class, "ProductPage"])->name('Product.Page'); 
+    Route::get('/product-page', [ProductController::class, "ProductPage"])->name('Product.Page');
+    Route::get('/ProductSavePage', [ProductController::class, "ProductSavePage"])->name('ProductSave.Page'); 
 
     //Customer API point
     Route::post('/create-customer', [CustomerController::class, "Createcustomer"])->name('create.customer');
