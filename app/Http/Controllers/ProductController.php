@@ -6,9 +6,20 @@ use App\Models\Product;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
+    public function ProductPage(Request $request)
+    {
+        $user_id = $request->header('id');
+        $products = Product::where('user_id', $user_id)->with('category')->latest()->get();
+        return Inertia::render('ProductPage', [
+            'products' => $products
+        ]);
+    }
+
+    
     public function CreateProduct(Request $request)
     {
         $user_id = $request->header('id');
@@ -112,15 +123,12 @@ class ProductController extends Controller
                 unlink(public_path($product->image));
             }
             $product->delete();
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Product Deleted Successfully !',
-            ]);
+
+            $data = ['message' => "Product Deleted Successfully ", 'status' => true, 'error' => ''];
+            return redirect('/product-page')->with($data);
         } catch (Exception $e) {
-            return response()->json([
-                'status' => 'Fail',
-                'message' => $e->getMessage(),
-            ]);
+            $data = ['message' => $e->getMessage(), 'status' => false, 'error' => ''];
+            return redirect('/product-page')->with($data);
         }
     }
 }

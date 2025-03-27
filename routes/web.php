@@ -47,6 +47,9 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::post('/update-product', [ProductController::class, "ProductUpdate"])->name('update.Product');
     Route::get('/Delete-Product/{id}', [ProductController::class, "ProductDelete"])->name('Delete.Product');
 
+    //Product page
+    Route::get('/product-page', [ProductController::class, "ProductPage"])->name('Product.Page'); 
+
     //Customer API point
     Route::post('/create-customer', [CustomerController::class, "Createcustomer"])->name('create.customer');
     Route::get('/list-customer', [CustomerController::class, "customerList"])->name('list.customer');

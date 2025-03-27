@@ -30,6 +30,10 @@ import { Link } from '@inertiajs/vue3';
             <span class="side-bar-item-caption">Customer</span>
             </Link>
 
+            <Link href="/product-page" class="side-bar-item">
+            <span class="side-bar-item-icon"><i class="fa fa-box text-green"></i></span>
+            <span class="side-bar-item-caption">Product</span>
+            </Link>
 
             <Link href="/logout" class="side-bar-item">
             <span class="side-bar-item-icon"><i class="fa fa-sign-out-alt text-green"></i></span>
