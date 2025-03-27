@@ -9,9 +9,17 @@ use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class InvoiceController extends Controller
 {
+    public function InvoicePage(Request $request)
+    {
+        $user_id = $request->header('id');
+        $list = Invoice::with('customer', 'InvoiceProduct.product')->where('user_id', $user_id)->get();
+        return Inertia::render('InvoiceListPage', ['list' => $list]);
+    }
+
     public function  InvoiceCreate(Request $request)
     {
         DB::beginTransaction();

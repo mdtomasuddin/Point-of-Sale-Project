@@ -68,6 +68,8 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::post('/details-invoice', [InvoiceController::class, "InvoiceDetails"])->name('details.invoice');
     Route::get('/invoice-delete/{id}', [InvoiceController::class, "InvoiceDelete"])->name('delete.invoice');
 
+    //Invoice page
+    Route::get('/invoice-page', [InvoiceController::class, "InvoicePage"])->name('invoice.Page');
     // Deshboard Summary APi point 
     Route::get('/deshboard-summary', [DeshboardController::class, 'deshboardSummary']);
 

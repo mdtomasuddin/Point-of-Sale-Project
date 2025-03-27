@@ -4,7 +4,7 @@ const props = defineProps({
     productImage: String,
 })
 
-const currentImage = props.productImage ? props.productImage : 'placeholder.png'
+const currentImage = props.productImage ? props.productImage : 'placeholder.png';
 const preview = ref(currentImage)
 
 const emit = defineEmits(['image'])

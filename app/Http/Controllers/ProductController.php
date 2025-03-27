@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function ProductSavePage(Request $request)
     {
         $user_id = $request->header('id');
-        $product_id =$request->query('id');
+        $product_id = $request->query('id');
         $product = Product::where('id', $product_id)->where('user_id', $user_id)->first();
         $categories = Category::where('user_id', $user_id)->get();
         return Inertia::render('ProductSavePage', [
@@ -35,7 +35,6 @@ class ProductController extends Controller
     public function CreateProduct(Request $request)
     {
         $user_id = $request->header('id');
-
         $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -64,7 +63,7 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        $data=['message'=>'Product created successfully','status'=>true,'error'=>''];
+        $data = ['message' => 'Product created successfully', 'status' => true, 'error' => ''];
         return redirect()->back()->with($data);
     }
 
@@ -118,8 +117,8 @@ class ProductController extends Controller
         }
 
         $product->save();
-        
-        $data=['message'=>'Product Updated successfully','status'=>true,'error'=>''];
+
+        $data = ['message' => 'Product Updated successfully', 'status' => true, 'error' => ''];
         return redirect('/product-page')->with($data);
     }
 
