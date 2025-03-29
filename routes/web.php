@@ -6,6 +6,7 @@ use App\Http\Controllers\DeshboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\SessionAuthenticateMiddleware;
 use App\Http\Middleware\TokenVerificationMiddleware;
@@ -70,6 +71,9 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
 
     //Invoice page
     Route::get('/invoice-page', [InvoiceController::class, "InvoicePage"])->name('invoice.Page');
+
+    //create-sale
+    Route::get('/create-sale',[SaleController::class,"SalePage"])->name('Sale.Page');
     // Deshboard Summary APi point 
     Route::get('/deshboard-summary', [DeshboardController::class, 'deshboardSummary']);
 
