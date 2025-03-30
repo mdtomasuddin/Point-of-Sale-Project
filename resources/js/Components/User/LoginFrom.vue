@@ -16,7 +16,7 @@ function submit() {
         form.post("/user-login", {
             onSuccess: () => {
                 if (page.props.flash.status === true) {
-                    router.get('/DashboardPage');
+                    router.get('/DeshboardPage');
                     toaster.success("login Successfully ");
                 } else {
                     toaster.error(page.props.flash.message);

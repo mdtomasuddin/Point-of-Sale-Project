@@ -25,6 +25,12 @@ import { Link } from '@inertiajs/vue3';
             <span class="side-bar-item-icon"><i class="fa fa-th-list text-green"></i></span>
             <span class="side-bar-item-caption">Category</span>
             </Link>
+
+            <Link href="/Brand-page" class="side-bar-item">
+            <span class="side-bar-item-icon"><i class="fa fa-tags text-green"></i></span>
+            <span class="side-bar-item-caption">Brand</span>
+            </Link>
+
             <Link href="/customer-page" class="side-bar-item">
             <span class="side-bar-item-icon"><i class="fa-brands fa-intercom"></i></span>
             <span class="side-bar-item-caption">Customer</span>

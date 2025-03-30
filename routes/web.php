@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeshboardController;
@@ -40,6 +41,16 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::get('/category-page', [CategoryController::class, "CategoryPage"])->name('CategoryPage');
     Route::get('/CategorySavePage', [CategoryController::class, "CategorySavePage"])->name('CategoryPage');
 
+    //Brand API point
+    Route::post('/create-brand', [BrandController::class, "CreateBrand"])->name('create.Brand');
+    Route::get('/list-brand', [BrandController::class, "BrandList"])->name('list.Brand');
+    Route::post('/brand-by-id', [BrandController::class, "BrandById"]);
+    Route::post('/brand-update', [BrandController::class, "BrandUpdate"])->name('update.Brand');
+    Route::get('/delete-brand/{id}', [BrandController::class, "BrandDelete"])->name('Delete.Brand');
+    //Brand page 
+    Route::get('/Brand-page', [BrandController::class, "BrandPage"])->name('BrandPage');
+    Route::get('/BrandSavePage', [BrandController::class, "BrandSavePage"]);
+
 
     //Products API point
     Route::post('/create-Product', [ProductController::class, "CreateProduct"])->name('create.Product');
@@ -50,7 +61,7 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
 
     //Product page
     Route::get('/product-page', [ProductController::class, "ProductPage"])->name('Product.Page');
-    Route::get('/ProductSavePage', [ProductController::class, "ProductSavePage"])->name('ProductSave.Page'); 
+    Route::get('/ProductSavePage', [ProductController::class, "ProductSavePage"])->name('ProductSave.Page');
 
     //Customer API point
     Route::post('/create-customer', [CustomerController::class, "Createcustomer"])->name('create.customer');
@@ -73,7 +84,7 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::get('/invoice-page', [InvoiceController::class, "InvoicePage"])->name('invoice.Page');
 
     //create-sale
-    Route::get('/create-sale',[SaleController::class,"SalePage"])->name('Sale.Page');
+    Route::get('/create-sale', [SaleController::class, "SalePage"])->name('Sale.Page');
     // Deshboard Summary APi point 
     Route::get('/deshboard-summary', [DeshboardController::class, 'deshboardSummary']);
 
@@ -86,6 +97,6 @@ route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
 
 //Page Route 
 Route::get('/login', [UserController::class, "LoginPage"])->name('loginPage');
-Route::get('/registration', [UserController::class,"registrationPage" ])->name('registrationPage');
+Route::get('/registration', [UserController::class, "registrationPage"])->name('registrationPage');
 Route::get('/send-otp', [UserController::class, 'SendOTPPage'])->name('SendOTPPage');
 Route::get('/verify-OTPPage', [UserController::class, 'VerifyOTPPage'])->name('VerifyOTPPage');
