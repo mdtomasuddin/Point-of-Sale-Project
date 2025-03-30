@@ -200,7 +200,7 @@ class UserController extends Controller
                 $request->session()->flush();
                 $data = ['message' => "Password Reset Successfully ", 'status' => true, 'error' => ''];
                 return redirect('/login')->with($data);
-            }else{
+            } else {
                 $data = ['message' => "Password Reset Failed ", 'status' => false, 'error' => ''];
                 return redirect('/reset-password')->with($data);
             }
@@ -213,8 +213,33 @@ class UserController extends Controller
             //     'status' => 'Fail',
             //     'message' => $e->getMessage(),
             // ]);
-            $data = ['message' =>$e->getMessage(), 'status' => false, 'error' => ''];
-                return redirect('/reset-password')->with($data);
+            $data = ['message' => $e->getMessage(), 'status' => false, 'error' => ''];
+            return redirect('/reset-password')->with($data);
         }
+    }
+
+    public function ProfileInfo(Request $request)
+    {
+        $user_id = request()->header('id');
+        $user = User::where('id', $user_id)->first();
+        return Inertia::render('profilePage', ['user' => $user]);
+    }
+
+    public function UpdateProfile(Request $request)
+    {
+        $user_id = request()->header('id');
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user_id,
+            'mobile' => 'required'
+        ]);
+
+        User::where('id', $user_id)->update([
+            "name" => $request->input('name'),
+            "email" => $request->input('email'),
+            "mobile" => $request->input('mobile'),
+        ]);
+        $data = ['message' => "Profile updated Successfully ", 'status' => true, 'error' => ""];
+        return redirect('profilePage')->with($data);
     }
 }

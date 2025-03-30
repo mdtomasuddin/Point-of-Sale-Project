@@ -44,6 +44,11 @@ import { Link } from '@inertiajs/vue3';
             <span class="side-bar-item-icon"><i class="fa fa-shopping-cart text-green"></i></span>
             <span class="side-bar-item-caption">Sale</span>
             </Link>
+            
+            <Link href="/profilePage" class="side-bar-item">
+            <span class="side-bar-item-icon"><i class="fa fa-user text-green"></i></span>
+            <span class="side-bar-item-caption">Profile</span>
+            </Link>
 
             <Link href="/logout" class="side-bar-item">
             <span class="side-bar-item-icon"><i class="fa fa-sign-out-alt text-green"></i></span>
