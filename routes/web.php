@@ -25,8 +25,8 @@ Route::post('/send-otp', [UserController::class, "SendOTPCode"]);
 Route::post('/verify-otp', [UserController::class, "VerifyOTP"]);
 
 
-// route::middleware(TokenVerificationMiddleware::class)->group(function () {
-route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
+route::middleware(TokenVerificationMiddleware::class)->group(function () {
+// route::middleware(SessionAuthenticateMiddleware::class)->group(function () {
     Route::get('/DeshboardPage', [DeshboardController::class, "DeshboardPage"])->name('Deshboard.Page');
     Route::get('/logout', [UserController::class, "logout"])->name('logout.Page');
     Route::post('/Reset-Password', [UserController::class, "resetPassword"]);

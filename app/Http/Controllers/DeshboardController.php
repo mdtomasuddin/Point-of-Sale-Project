@@ -37,8 +37,7 @@ class DeshboardController extends Controller
         ];
 
         return Inertia::render('DashboardPage', ['list' => $data]);
-    } //end method
-
+    } 
 
 
 

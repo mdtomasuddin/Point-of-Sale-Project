@@ -47,10 +47,7 @@ class CustomerController extends Controller
         ]);
         $data = ['message' => "Customer Created Successfully ", 'status' => true, 'error' => ''];
         return redirect('/customer-page')->with($data);
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Customer Created Successfully !',
-        // ]);
+       
     }
     public function customerList(Request $request)
     {
@@ -77,10 +74,7 @@ class CustomerController extends Controller
             'mobile' => $request->input('mobile'),
         ]);
 
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Customer Updated Successfully !',
-        // ]);
+       
         $data = ['message' => "Customer Updated Successfully ", 'status' => true, 'error' => ''];
         return redirect('/customer-page')->with($data);
     }
@@ -89,10 +83,7 @@ class CustomerController extends Controller
     {
         $user_id = $request->header('id');
         Customer::where('user_id', $user_id)->where('id', $id)->delete();
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'customer Deleted Successfully !',
-        // ]);
+       
         $data = ['message' => "Customer Deleted Successfully ", 'status' => true, 'error' => ''];
         return redirect('/customer-page')->with($data);
     }

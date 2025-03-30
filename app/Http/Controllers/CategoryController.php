@@ -36,11 +36,6 @@ class CategoryController extends Controller
             "user_id" => $user_id
         ]);
 
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Category Create Successfully !',
-        // ]);
-
         $data = ['message' => "Category Create Successfully ", 'status' => true, 'error' => ''];
         return redirect('/category-page')->with($data);
     }
@@ -67,10 +62,7 @@ class CategoryController extends Controller
         Category::where('user_id', $user_id)->where('id', $id)->update([
             'name' => $request->input('name'),
         ]);
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Category Create Successfully !',
-        // ]);
+      
         $data = ['message' => "Category Updated Successfully ", 'status' => true, 'error' => ''];
         return redirect('/category-page')->with($data);
     }
@@ -80,10 +72,7 @@ class CategoryController extends Controller
     {
         $user_id = $request->header('id');
         Category::where('user_id', $user_id)->where('id', $id)->delete();
-        // return response()->json([
-        //     'status' => 'success',
-        //     'message' => 'Category Deleted Successfully !',
-        // ]);
+       
         $data = ['message' => "Category Deleted Successfully ", 'status' => true, 'error' => ''];
         return redirect('/category-page')->with($data);
     }
