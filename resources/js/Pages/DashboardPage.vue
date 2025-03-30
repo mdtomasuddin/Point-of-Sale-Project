@@ -1,12 +1,15 @@
 <script setup>
 import SideNavLayout from '../Layout/SideNavLayout.vue';
-</script>
+import SummaryView from '../Components/Dashboard/SummeryView.vue';
 
+</script>
+ 
 <template>
     <SideNavLayout>
-        <h1>Wellcome to DeshboardPage</h1>
+        <SummaryView />
     </SideNavLayout>
-
 </template>
-
-<style scoped></style>
+ 
+<style scoped>
+ 
+</style>

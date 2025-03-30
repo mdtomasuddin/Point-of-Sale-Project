@@ -67,16 +67,20 @@ class InvoiceController extends Controller
             }
 
             DB::commit();
-            return response()->json([
-                'status' => 'success',
-                'message' => "Invoice Create Successfully ",
-            ]);
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => "Invoice Create Successfully ",
+            // ]);
+            $data = ['message' => 'Product created successfully', 'status' => true, 'error' => ''];
+            return redirect('/invoice-page')->with($data);
         } catch (Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'status' => 'failed',
-                'message' => $e->getMessage(),
-            ]);
+            // return response()->json([
+            //     'status' => 'failed',
+            //     'message' => $e->getMessage(),
+            // ]);
+            $data = ['message' => 'Product created successfully', 'status' => false, 'error' => $e->getMessage()];
+            return redirect()->back()->with($data);
         }
     }
 

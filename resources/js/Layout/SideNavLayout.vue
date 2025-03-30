@@ -16,7 +16,7 @@ import { Link } from '@inertiajs/vue3';
                 <img alt="" class="side-nav-logo" src="../Assets/img/logo.svg" />
             </div>
 
-            <Link href="#" class="side-bar-item">
+            <Link href="/DeshboardPage" class="side-bar-item">
             <span class="side-bar-item-icon"><i class="fa fa-tachometer-alt text-green"></i></span>
             <span class="side-bar-item-caption">Dashboard</span>
             </Link>
