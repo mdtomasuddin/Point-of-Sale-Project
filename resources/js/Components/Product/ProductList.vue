@@ -12,6 +12,7 @@ const Header = [
     { text: 'Unit', value: 'unit' },
     { text: 'Image', value: 'image' },
     {text:'category',value:'category.name'},
+    {text:'Brand',value:'brand.name'},
     { text: 'Action', value: 'action' }
 ];
 const Item = ref(page.props.products);

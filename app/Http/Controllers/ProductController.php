@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -14,7 +15,7 @@ class ProductController extends Controller
     public function ProductPage(Request $request)
     {
         $user_id = $request->header('id');
-        $products = Product::where('user_id', $user_id)->with('category')->latest()->get();
+        $products = Product::where('user_id', $user_id)->with(['category','brand'])->latest()->get();
         return Inertia::render('ProductPage', [
             'products' => $products
         ]);
@@ -26,9 +27,11 @@ class ProductController extends Controller
         $product_id = $request->query('id');
         $product = Product::where('id', $product_id)->where('user_id', $user_id)->first();
         $categories = Category::where('user_id', $user_id)->get();
+        $brands = Brand::where('user_id', $user_id)->get();
         return Inertia::render('ProductSavePage', [
             'product' => $product,
-            'categories' => $categories
+            'categories' => $categories,
+            'brands' => $brands
         ]);
     }
 
@@ -40,6 +43,7 @@ class ProductController extends Controller
             'price' => 'required',
             'unit' => 'required',
             'category_id' => 'required',
+            'brand_id' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
@@ -48,6 +52,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'unit' => $request->unit,
             'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id,
             'user_id' => $user_id
         ];
 
@@ -90,6 +95,7 @@ class ProductController extends Controller
             'price' => 'required',
             'unit' => 'required',
             'category_id' => 'required',
+            'brand_id' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
@@ -99,6 +105,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->unit = $request->unit;
         $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
 
         if ($request->hasFile('image')) {
             if ($product->image &&  file_exists(public_path($product->image))) {

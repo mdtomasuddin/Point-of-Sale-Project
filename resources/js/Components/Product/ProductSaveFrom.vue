@@ -8,10 +8,11 @@ import ImageUpload from './ImageUpload.vue';
 const urlParams = new URLSearchParams(window.location.search)
 let id = ref(parseInt(urlParams.get('id')))
 
-const form = useForm({ name: '', price: '', unit: '', category_id: '', image: null, id: id.value || null })
+const form = useForm({ name: '', price: '', unit: '', category_id: '', brand_id:'',image: null, id: id.value || null })
 const page = usePage()
 
 const categories = ref(page.props.categories)
+const brands = ref(page.props.brands)
 
 let URL = "/create-Product";
 let list = page.props.product
@@ -23,6 +24,7 @@ if (id.value !== 0 && list !== null) {
     form.price = list['price'];
     form.unit = list['unit'];
     form.category_id = list['category_id'];
+    form.brand_id = list['brand_id'];
     form.image = list['image'];
 }
 
@@ -75,6 +77,15 @@ function submit() {
                                         <option value="" disabled>Select a category</option>
                                         <option v-for="category in categories" :key="category.id" :value="category.id">
                                             {{ category.name }}</option>
+                                    </select>
+                                </div>
+                                <!-- Brand Dropdown -->
+                                <div>
+                                    <label for="brand">Select Brand:</label>
+                                    <select v-model="form.brand_id" class="form-control" id="category">
+                                        <option value="" disabled>Select a category</option>
+                                        <option v-for="brand in brands" :key="brand.id" :value="brand.id">
+                                            {{ brand.name }}</option>
                                     </select>
                                 </div>
                                 <br />
